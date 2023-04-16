@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class GameWindow extends JFrame {
     private JPanel container;
@@ -14,6 +15,7 @@ public class GameWindow extends JFrame {
     Color[] targetsColors;
 
     Random r = new Random();
+    Semaphore gottaAim = new Semaphore(1);
 
     GameWindow() {
         Storage.points = 0;
