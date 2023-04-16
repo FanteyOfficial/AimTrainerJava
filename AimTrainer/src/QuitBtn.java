@@ -6,7 +6,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class QuitBtn extends JButton {
-    QuitBtn(JFrame win) {
+    JFrame oldWin;
+    JFrame newWin;
+
+    QuitBtn(JFrame oldWin, JFrame newWin) {
+        this.oldWin = oldWin;
+        this.newWin = newWin;
+
         this.setText("Quit");
         this.setBorderPainted(false);
         this.setBackground(Color.decode("#0CF574"));
@@ -31,9 +37,8 @@ public class QuitBtn extends JButton {
 
     ActionListener openWin = new ActionListener() {
         public void actionPerformed(ActionEvent action) {
-            dispose();
-            GameWindow w = new GameWindow();
-            w.setVisible(true);
+            oldWin.dispose();
+            newWin.setVisible(true);
         }
     };
 }
