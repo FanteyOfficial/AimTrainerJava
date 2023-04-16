@@ -3,13 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
-public class GameWindow extends JFrame implements KeyListener {
+public class GameWindow extends JFrame {
     private JPanel container;
 
     JLabel winTitle;
     JLabel scoreTxt;
     Target[] targets;
     Color[] targetsColors;
+
     Random r = new Random();
 
     GameWindow() {
@@ -87,30 +88,14 @@ public class GameWindow extends JFrame implements KeyListener {
 
     private void init() {
         setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 800);
         setResizable(false);
         setTitle("AimTrainer");
-        addKeyListener(this);
 
         add(winTitle);
         add(scoreTxt);
 
         setVisible(true);
     }
-
-    @Override
-    public void keyTyped(KeyEvent e) {System.out.println("cliccato"); }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            dispose();
-            MenuWindow w = new MenuWindow();
-            w.setVisible(true);
-            System.out.println("cliccato");
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {System.out.println("cliccato"); }
 }

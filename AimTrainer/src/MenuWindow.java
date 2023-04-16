@@ -72,6 +72,7 @@ public class MenuWindow extends JFrame {
         setResizable(false);
         getContentPane().setBackground(Color.decode("#3E92CC"));
         setTitle("AimTrainerMenu");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         add(winTitle);
 
