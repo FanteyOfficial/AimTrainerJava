@@ -15,7 +15,7 @@ public class GameWindow extends JFrame {
     Color[] targetsColors;
 
     Random r = new Random();
-    Semaphore gottaAim = new Semaphore(1);
+    Semaphore semaforo = new Semaphore(1);
 
     GameWindow() {
         Storage.points = 0;
@@ -77,16 +77,15 @@ public class GameWindow extends JFrame {
         for (int i=0; i<targets.length; i++) {
             int dim = (i+1)*100;
             if (i == 2) dim -= 50;
-            targets[i] = new Target(dim, dim, targetsColors[i], 50*(targets.length-i), scoreTxt);
+            targets[i] = new Target(dim, dim, targetsColors[i], 50*(targets.length-i), scoreTxt, semaforo);
 
             //System.out.println();
         }
-
         // place target non-colliding
         for (int i=0; i<targets.length; i++) {
             targets[i].changeLocation(r.nextInt(10, 800), r.nextInt(70, 600));
             add(targets[i]);
-
+            targets[i].start();
             /*while(Target.isColliding(targets, targets[i])) {
                 this.remove(targets[i]);
 

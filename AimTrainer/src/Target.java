@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Semaphore;
 
-public class Target extends JButton {
+public class Target extends JButton implements Runnable{
     int pointValue;
 
     int x, y;
@@ -13,7 +14,7 @@ public class Target extends JButton {
 
     JLabel scoreTxt;
 
-    Target(int width, int height, Color color, int pointValue, JLabel scoreTxt) {
+    Target(int width, int height, Color color, int pointValue, JLabel scoreTxt, Semaphore gestione) {
         this.width = width;
         this.height = height;
         this.color = color;
@@ -54,7 +55,7 @@ public class Target extends JButton {
             return false;
         }
     }
-
+    
     ActionListener clicked = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             Storage.points += pointValue;
@@ -62,4 +63,9 @@ public class Target extends JButton {
             //System.out.println(Storage.points);
         }
     };
+
+    @Override
+    public void run() {
+        
+    }
 }
