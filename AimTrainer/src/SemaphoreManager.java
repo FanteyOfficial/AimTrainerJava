@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreManager {
-    Semaphore s = new Semaphore();
+    Semaphore s = new Semaphore(1);
 
-    SemaphoreManager(Window win) {
+    SemaphoreManager(Window win, Target[] targets) {
 
     }
 }

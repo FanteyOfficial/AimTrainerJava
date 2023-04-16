@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Target extends JButton implements Runnable {
+public class Target extends JButton {
     int pointValue;
 
     int x, y;
@@ -30,11 +30,7 @@ public class Target extends JButton implements Runnable {
     ActionListener clicked = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             Storage.points += pointValue;
+            //System.out.println(Storage.points);
         }
     };
-
-    @Override
-    public void run() {
-
-    }
 }
