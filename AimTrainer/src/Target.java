@@ -2,39 +2,52 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Semaphore;
 
-public class Target extends JButton implements Runnable{
+public class Target extends Thread{
     int pointValue;
 
     int x, y;
     int width, height;
-
+    public JButton bersaglio;
     Color color;
-
+    String colore;
+    SemaphoreManager gestione;
     JLabel scoreTxt;
 
-    Target(int width, int height, Color color, int pointValue, JLabel scoreTxt, Semaphore gestione) {
+    Target(int width, int height,String colore, Color color, int pointValue, JLabel scoreTxt, SemaphoreManager gestione) {
         this.width = width;
         this.height = height;
         this.color = color;
+        this.colore = colore;
+        this.gestione = gestione;
         this.pointValue = pointValue;
         this.scoreTxt = scoreTxt;
+        bersaglio = new JButton();
         init();
     }
-
+    @Override
+    public void run() {
+        while(true){
+            gestione.appari(colore, this);
+            try {
+                Thread.sleep(3000);
+            } catch (Exception e) {
+                
+            }
+        }
+    }
     public void init() {
-        this.setBounds(x, y, width, height);
-        this.setBackground(color);
-        this.addActionListener(clicked);
+        bersaglio.setBounds(x, y, width, height);
+        bersaglio.setBackground(color);
+        bersaglio.addActionListener(clicked);
     }
 
     public void changeLocation(int x, int y) {
-        this.setLocation(x, y);
+        bersaglio.setLocation(x, y);
     }
 
     // da sistemare
-    static boolean isColliding(Target[] targets, Target currentTarget) {
+    static boolean isColliding(JButton[] targets, JButton currentTarget) {
         Rectangle rect = new Rectangle();
         Rectangle[] rects = new Rectangle[targets.length];
 
@@ -64,8 +77,5 @@ public class Target extends JButton implements Runnable{
         }
     };
 
-    @Override
-    public void run() {
-        
-    }
+
 }

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
-import java.util.concurrent.Semaphore;
 
 public class GameWindow extends JFrame {
     private JPanel container;
@@ -11,15 +10,13 @@ public class GameWindow extends JFrame {
 
     JLabel winTitle;
     JLabel scoreTxt;
-    Target[] targets;
-    Color[] targetsColors;
 
     Random r = new Random();
-    Semaphore semaforo = new Semaphore(1);
-
-    GameWindow() {
+    SemaphoreManager semaforo;
+    GameWindow() throws Exception{
+        
         Storage.points = 0;
-
+        
         container = new JPanel();
         container.setBackground(Color.decode("#3E92CC"));
         container.addMouseListener(new MouseAdapter() {
@@ -34,7 +31,7 @@ public class GameWindow extends JFrame {
         });
         setContentPane(container);
         setVisible(true);
-
+        semaforo = new SemaphoreManager(this);
 
 
         winTitle = new JLabel("Aim Trainer");
@@ -46,10 +43,6 @@ public class GameWindow extends JFrame {
         scoreTxt.setLocation(5, 5);
         scoreTxt.setSize(300,20);
         scoreTxt.setFont(new Font("Sans Serif", Font.BOLD, 22));
-
-        // create target
-        targets = new Target[3];
-        targetsColors = new Color[] {Color.decode("#bb4430"), Color.decode("#E9D758"), Color.decode("#0CF574")};
 
         quitBtn = new JButton("QUIT");
         quitBtn.setBorderPainted(false);
@@ -74,18 +67,10 @@ public class GameWindow extends JFrame {
         quitBtn.setSize(120, 50);
         quitBtn.setLocation(1000-140, 5);
 
-        for (int i=0; i<targets.length; i++) {
-            int dim = (i+1)*100;
-            if (i == 2) dim -= 50;
-            targets[i] = new Target(dim, dim, targetsColors[i], 50*(targets.length-i), scoreTxt, semaforo);
-
-            //System.out.println();
-        }
         // place target non-colliding
-        for (int i=0; i<targets.length; i++) {
+        /*for (int i=0; i<targets.length; i++) {
             targets[i].changeLocation(r.nextInt(10, 800), r.nextInt(70, 600));
             add(targets[i]);
-            targets[i].start();
             /*while(Target.isColliding(targets, targets[i])) {
                 this.remove(targets[i]);
 
@@ -95,7 +80,7 @@ public class GameWindow extends JFrame {
             }*/
 
             //System.out.println();
-        }
+        //}
 
         /* va messo nel semaforo credo */
         /*
