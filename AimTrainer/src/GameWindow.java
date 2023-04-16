@@ -6,6 +6,8 @@ import java.util.Random;
 public class GameWindow extends JFrame {
     private JPanel container;
 
+    JButton quitBtn;
+
     JLabel winTitle;
     JLabel scoreTxt;
     Target[] targets;
@@ -14,6 +16,8 @@ public class GameWindow extends JFrame {
     Random r = new Random();
 
     GameWindow() {
+        Storage.points = 0;
+
         container = new JPanel();
         container.setBackground(Color.decode("#3E92CC"));
         container.addMouseListener(new MouseAdapter() {
@@ -44,6 +48,29 @@ public class GameWindow extends JFrame {
         // create target
         targets = new Target[3];
         targetsColors = new Color[] {Color.decode("#bb4430"), Color.decode("#E9D758"), Color.decode("#0CF574")};
+
+        quitBtn = new JButton("QUIT");
+        quitBtn.setBorderPainted(false);
+        quitBtn.setBackground(Color.decode("#0CF574"));
+        quitBtn.setForeground(Color.decode("#231F20"));
+        quitBtn.setFont(new Font("Sans Serif", Font.PLAIN, 24));
+        quitBtn.setFocusPainted(false);
+        quitBtn.addActionListener(gameMenu);
+        quitBtn.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                quitBtn.setBackground(Color.decode("#E9D758"));
+                quitBtn.setForeground(Color.decode("#231F20"));
+                quitBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+            public void mouseExited(MouseEvent evt) {
+                //startButton.setBackground(UIManager.getColor("control"));
+                quitBtn.setBackground(Color.decode("#0CF574"));
+                quitBtn.setForeground(Color.decode("#231F20"));
+                quitBtn.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
+        });
+        quitBtn.setSize(120, 50);
+        quitBtn.setLocation(1000-140, 5);
 
         for (int i=0; i<targets.length; i++) {
             int dim = (i+1)*100;
@@ -95,7 +122,16 @@ public class GameWindow extends JFrame {
 
         add(winTitle);
         add(scoreTxt);
+        add(quitBtn);
 
         setVisible(true);
     }
+
+    ActionListener gameMenu = new ActionListener() {
+        public void actionPerformed(ActionEvent action) {
+            dispose();
+            MenuWindow w = new MenuWindow();
+            w.setVisible(true);
+        }
+    };
 }
