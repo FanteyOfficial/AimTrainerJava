@@ -85,13 +85,13 @@ public class MenuWindow extends JFrame {
     ActionListener startGame = new ActionListener() {
         public void actionPerformed(ActionEvent action) {
             dispose();
-            GameWindow w = null;
+            GameWindow w;
             try {
                 w = new GameWindow();
+                w.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            w.setVisible(true);
         }
     };
 

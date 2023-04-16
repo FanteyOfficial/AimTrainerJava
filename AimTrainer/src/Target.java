@@ -13,8 +13,9 @@ public class Target extends Thread{
     String colore;
     SemaphoreManager gestione;
     JLabel scoreTxt;
+    JFrame gw;
 
-    Target(int width, int height,String colore, Color color, int pointValue, JLabel scoreTxt, SemaphoreManager gestione) {
+    Target(int width, int height,String colore, Color color, int pointValue, JLabel scoreTxt, SemaphoreManager gestione, JFrame win) {
         this.width = width;
         this.height = height;
         this.color = color;
@@ -23,16 +24,17 @@ public class Target extends Thread{
         this.pointValue = pointValue;
         this.scoreTxt = scoreTxt;
         bersaglio = new JButton();
+        this.gw = win;
         init();
     }
     @Override
     public void run() {
-        while(true){
-            gestione.appari(colore, this);
+        while(true) {
+            gestione.appari(colore);
             try {
                 Thread.sleep(3000);
             } catch (Exception e) {
-                
+
             }
         }
     }
@@ -74,6 +76,7 @@ public class Target extends Thread{
             Storage.points += pointValue;
             scoreTxt.setText("Score: " + Storage.points);
             //System.out.println(Storage.points);
+            gw.remove(bersaglio);
         }
     };
 

@@ -1,23 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 
 public class GameWindow extends JFrame {
-    private JPanel container;
-
     JButton quitBtn;
 
     JLabel winTitle;
     JLabel scoreTxt;
-
-    Random r = new Random();
     SemaphoreManager semaforo;
     GameWindow() throws Exception{
         
         Storage.points = 0;
-        
-        container = new JPanel();
+
+        JPanel container = new JPanel();
         container.setBackground(Color.decode("#3E92CC"));
         container.addMouseListener(new MouseAdapter() {
             @Override
@@ -30,8 +25,8 @@ public class GameWindow extends JFrame {
             }
         });
         setContentPane(container);
-        setVisible(true);
-        semaforo = new SemaphoreManager(this);
+        container.setVisible(true);
+
 
 
         winTitle = new JLabel("Aim Trainer");
@@ -97,6 +92,7 @@ public class GameWindow extends JFrame {
         */
 
         init();
+        semaforo = new SemaphoreManager(this);
     }
 
     private void init() {
