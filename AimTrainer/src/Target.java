@@ -1,3 +1,5 @@
+import org.w3c.dom.css.Rect;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,6 +32,29 @@ public class Target extends JButton {
 
     public void changeLocation(int x, int y) {
         this.setLocation(x, y);
+    }
+
+    // da sistemare
+    static boolean isColliding(Target[] targets, Target currentTarget) {
+        Rectangle rect = new Rectangle();
+        Rectangle[] rects = new Rectangle[targets.length];
+
+        rect = currentTarget.getBounds();
+        int temp = 0;
+        for (int i=0; i<targets.length; i++) {
+            if (rect != targets[i].getBounds()) {
+                rects[temp] = targets[i].getBounds();
+                temp++;
+            }
+            System.out.println(rect == targets[i].getBounds());
+        }
+
+        //if (rects[0].intersects(rects[1]) || rects[0].intersects(rects[2]) || rects[1].intersects(rects[2])) {
+        if (rect.intersects(rects[0]) || rect.intersects(rects[1])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     ActionListener clicked = new ActionListener() {
