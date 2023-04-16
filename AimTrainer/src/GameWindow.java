@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class GameWindow extends JFrame implements KeyListener {
     private JPanel container;
@@ -11,6 +12,7 @@ public class GameWindow extends JFrame implements KeyListener {
     Target[] targets;
     Color[] targetsColors;
     Random r = new Random();
+    Semaphore gottaAim = new Semaphore(1);
 
     GameWindow() {
         container = new JPanel();
