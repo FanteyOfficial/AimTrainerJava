@@ -13,7 +13,7 @@ public class MenuWindow extends JFrame {
 
     MenuWindow() {
         winTitle = new JLabel("Aim Trainer Menu");
-        winTitle.setLocation((1000/2)-(300/2)+35, 5);
+        winTitle.setLocation((400/2)-(300/2)+10, 5);
         winTitle.setSize(300,50);
         winTitle.setFont(new Font("Sans Serif", Font.BOLD, 32));
 
@@ -38,7 +38,7 @@ public class MenuWindow extends JFrame {
             }
         });
         startBtn.setSize(200, 50);
-        startBtn.setLocation((1000/2)-(200/2)+10, 100);
+        startBtn.setLocation((400/2)-(200/2), 100);
 
         quitBtn = new JButton("QUIT");
         quitBtn.setBorderPainted(false);
@@ -61,14 +61,14 @@ public class MenuWindow extends JFrame {
             }
         });
         quitBtn.setSize(120, 50);
-        quitBtn.setLocation((1000/2)-(120/2)+10, 200);
+        quitBtn.setLocation((400/2)-(120/2), 200);
 
         init();
     }
 
     private void init() {
         setLayout(null);
-        setSize(1000, 800);
+        setSize(400, 350);
         setResizable(false);
         getContentPane().setBackground(Color.decode("#3E92CC"));
         setTitle("AimTrainerMenu");
