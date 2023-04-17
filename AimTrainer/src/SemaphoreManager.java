@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SemaphoreManager{
     Semaphore verde = new Semaphore(1);
@@ -27,7 +28,7 @@ public class SemaphoreManager{
             //System.out.println();
         }
         for (int i=0; i<targets.length; i++) {
-            targets[i].changeLocation(r.nextInt(10, 800), r.nextInt(70, 600));
+            targets[i].changeLocation(ThreadLocalRandom.current().nextInt(10, 800), ThreadLocalRandom.current().nextInt(70, 600));
             targets[i].start();
         }
         targets[0].bersaglio.addActionListener(clickedRosso);
@@ -36,18 +37,18 @@ public class SemaphoreManager{
     }
     ActionListener clickedVerde = evt -> {
         giallo.release();
-        targets[2].changeLocation(r.nextInt(10, 800), r.nextInt(70, 600));
+        targets[2].changeLocation(ThreadLocalRandom.current().nextInt(10, 800), ThreadLocalRandom.current().nextInt(70, 600));
         System.out.println("click verde");
 
     };
     ActionListener clickedGiallo = evt -> {
         rosso.release();
-        targets[1].changeLocation(r.nextInt(10, 800), r.nextInt(70, 600));
+        targets[1].changeLocation(ThreadLocalRandom.current().nextInt(10, 800), ThreadLocalRandom.current().nextInt(70, 600));
         System.out.println("click giallo");
     };
     ActionListener clickedRosso = evt -> {
         verde.release();
-        targets[0].changeLocation(r.nextInt(10, 800), r.nextInt(70, 600));
+        targets[0].changeLocation(ThreadLocalRandom.current().nextInt(10, 800), ThreadLocalRandom.current().nextInt(70, 600));
         System.out.println("click rosso");
     };
     public void appari(String colore){
